@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="HtmlPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Menu ID="Menu1" runat="server"
+                Orientation="Horizontal">
+                <Items>
+                    <asp:MenuItem Text="HOME"
+                        NavigateUrl="~/Home.aspx">
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="INTRODUCERE DATE"
+                        Selectable="false">
+                        <asp:MenuItem Text="Actualizare Date">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Adăugare angajați"
+                            NavigateUrl="~/AdaugareAngajati.aspx">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Ștergere angajați">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Calcul salarii">
+                        </asp:MenuItem>
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="TIPĂRIRE">
+                        <asp:MenuItem Text="Stat plată">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Fluturași">
+                        </asp:MenuItem>
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="MODIF_PROCENTE">
+                    </asp:MenuItem>
+                </Items>
+            </asp:Menu>
+
+            <hr />
+
+            <asp:ContentPlaceHolder ID="MainContent"
+                runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
