@@ -7,9 +7,14 @@
     <title></title>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
-</head>
+    <style type="text/css">
+        .auto-style1 {
+            margin-bottom: 0px;
+        }
+    </style>
+    </head>
 
-<body>
+<body style="height: 207px">
     <form id="form1" runat="server">
         <div>
             <asp:Menu ID="Menu1" runat="server"
@@ -21,7 +26,8 @@
 
                     <asp:MenuItem Text="INTRODUCERE DATE"
                         Selectable="false">
-                        <asp:MenuItem Text="Actualizare Date">
+                        <asp:MenuItem Text="Actualizare Date"
+                            NavigateUrl="~/ActualizareDate.aspx">
                         </asp:MenuItem>
                         <asp:MenuItem Text="Adăugare angajați"
                             NavigateUrl="~/AdaugareAngajati.aspx">
@@ -44,11 +50,15 @@
                 </Items>
             </asp:Menu>
 
-            <hr />
-
             <asp:ContentPlaceHolder ID="MainContent"
                 runat="server">
+                <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick1">
+                </asp:Timer>
+                <asp:Image ID="Image1" runat="server" Height="132px" Width="187px" />
             </asp:ContentPlaceHolder>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <hr class="auto-style1" />
+
         </div>
     </form>
 </body>

@@ -1,19 +1,72 @@
-# Visual Studio
+
+# Visual Studio user-specific files
 .vs/
-*.user
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
 
-# Build outputs
+# Build output
 [Bb]in/
 [Oo]bj/
 [Dd]ebug/
 [Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
 
-# NuGet
-packages/
-
-# Temporary files
+# Visual Studio temporary and cache files
+*.cache
 *.tmp
 *.log
+*.pdb
+*.ilk
+*.obj
+
+# NuGet downloaded packages
+packages/*
+!packages/build/
+!packages/repositories.config
+*.nupkg
+
+# Publish profiles and deployment output
+*.pubxml
+*.publish.xml
+*.publishsettings
+PublishScripts/
+publish/
+
+# Local databases and database logs
+*.mdf
+*.ldf
+*.ndf
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Backup files
+*~
+*.bak
+*.old
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Node dependencies, if used
+node_modules/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+coverage/
+
+# ASP.NET generated code
+Generated_Code/
+ScaffoldingReadMe.txt
+
+Web.config/
