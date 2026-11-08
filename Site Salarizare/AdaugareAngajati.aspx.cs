@@ -60,13 +60,13 @@ public partial class AdaugareAngajati : System.Web.UI.Page
             Text4.Text = "";
 
             GridView1.Visible = false;
+            conn.Close();
         }
         catch (OracleException ex)
         {
             Console.WriteLine(ex.Message);
         }
     }
-
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {

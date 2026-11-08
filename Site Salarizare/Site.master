@@ -32,9 +32,11 @@
                         <asp:MenuItem Text="Adăugare angajați"
                             NavigateUrl="~/AdaugareAngajati.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Ștergere angajați">
+                        <asp:MenuItem Text="Ștergere angajați"
+                            NavigateUrl="~/StergereAngajati.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Calcul salarii">
+                        <asp:MenuItem Text="Calcul salarii"
+                            NavigateUrl="~/CalculSalarii.aspx">
                         </asp:MenuItem>
                     </asp:MenuItem>
 
@@ -45,7 +47,8 @@
                         </asp:MenuItem>
                     </asp:MenuItem>
 
-                    <asp:MenuItem Text="MODIF_PROCENTE">
+                    <asp:MenuItem Text="MODIF_PROCENTE"
+                        NavigateUrl="~/ModificareProcente.aspx">
                     </asp:MenuItem>
                 </Items>
             </asp:Menu>

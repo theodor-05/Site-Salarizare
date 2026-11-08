@@ -3,3 +3,13 @@
         
     </div>
 </asp:Content>
+
+Regex parola:
+
+<asp:RegularExpressionValidator
+                ID="ParolaValidator1"
+                runat="server"
+                ControlToValidate="Text4"
+                ValidationExpression="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,10})$"
+                ErrorMessage="Introdu o parolă validă."
+                ForeColor="Red" />

@@ -17,7 +17,7 @@
             ID="NameValidator"
             runat="server"
             ControlToValidate="Text1"
-            ValidationExpression="^[a-zA-ZăâîșțĂÂÎȘȚ' -]{1,40}$"
+            ValidationExpression="^[a-zA-Z' -]{1,40}$"
             ErrorMessage="Introdu un nume valid."
             ForeColor="Red" />
     </p>

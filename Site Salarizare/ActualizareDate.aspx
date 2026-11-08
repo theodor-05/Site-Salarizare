@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
-        
+        <h2>Actualizare Date</h2>
         <div class="auto-style2">
             <table style="border-style: solid; border-color: #00FF00; width: 100%; background-color: #FFFFFF;">
                 <tr>
@@ -26,7 +26,7 @@
                             ID="NameValidator"
                             runat="server"
                             ControlToValidate="TextBox2"
-                            ValidationExpression="^[a-zA-ZăâîșțĂÂÎȘȚ' -]{1,40}$"
+                            ValidationExpression="^[a-zA-Z' -]{1,40}$"
                             ErrorMessage="Introdu un nume valid."
                             ForeColor="Red" />
 
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="Button1" runat="server" Text="Caută" OnClick="Button1_Click" />
+                        <asp:Button ID="Button1" runat="server" Text="Caută" OnClick="Button1_Click"/>
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -48,43 +48,86 @@
         
     </div>
     <div class="auto-style4">
-        <asp:GridView ID="GridView1" runat="server" CssClass="auto-style5" AutoGenerateColumns="False" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowUpdating="GridView1_RowUpdating">
+        <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1"
+            EmptyDataText="Angajatul căutat nu există!"
+            AutoGenerateColumns="False" DataKeyNames="NR_CRT">
             <Columns>
-                <asp:BoundField HeaderText="ID" ReadOnly="True" DataField="NR_CRT">
-                <ItemStyle BackColor="Yellow"  />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="Nume" DataField="NUME"/>
-                <asp:BoundField HeaderText="Prenume" DataField="PRENUME" />
-                <asp:BoundField HeaderText="Funcție" DataField="FUNCTIE"/>
-                <asp:BoundField HeaderText="Salariu de bază" DataField="SALARIU_BAZA" />
-                <asp:BoundField HeaderText="Spor (%)" DataField="SPOR" />
-                <asp:BoundField HeaderText="Premii brute" DataField="PREMII_BRUTE" />
-                <asp:BoundField HeaderText="Total brut" ReadOnly="True" DataField="TOTAL_BRUT" >
-                <ItemStyle BackColor="Yellow" />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="Brut impozitabil" ReadOnly="True" DataField="BRUT_IMPOZITABIL" >
-                <ItemStyle BackColor="Yellow" />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="Impozit" ReadOnly="True" DataField="IMPOZIT" >
-                <ItemStyle BackColor="Yellow" />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="CAS" ReadOnly="True" DataField="CAS" >
-                <ItemStyle BackColor="Yellow" />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="CASS" ReadOnly="True" DataField="CASS" >
-                <ItemStyle BackColor="Yellow" />
-                </asp:BoundField>
-                <asp:BoundField HeaderText="Rețineri" DataField="RETINERI" />
-                <asp:BoundField HeaderText="Virat card" ReadOnly="True" DataField="VIRAT_CARD" >
-                <ItemStyle BackColor="Yellow" />
+                <asp:CommandField ShowEditButton="true" EditText="Editează"
+                    UpdateText="Salvează" CancelText="Anulează" />
+
+                <asp:BoundField DataField="NR_CRT" HeaderText="ID" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
                 </asp:BoundField>
 
-                <asp:CommandField ShowEditButton="true" />
+                <asp:BoundField DataField="NUME" HeaderText="Nume" />
+                <asp:BoundField DataField="PRENUME" HeaderText="Prenume" />
+                <asp:BoundField DataField="FUNCTIE" HeaderText="Funcție" />
+                <asp:BoundField DataField="SALARIU_BAZA" HeaderText="Salariu de bază" />
+                <asp:BoundField DataField="SPOR" HeaderText="Spor (%)" />
+                <asp:BoundField DataField="PREMII_BRUTE" HeaderText="Premii brute" />
 
+                <asp:BoundField DataField="TOTAL_BRUT" HeaderText="Total brut" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
+                <asp:BoundField DataField="BRUT_IMPOZITABIL" HeaderText="Brut impozitabil" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
+                <asp:BoundField DataField="IMPOZIT" HeaderText="Impozit" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
+                <asp:BoundField DataField="CAS" HeaderText="CAS" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
+                <asp:BoundField DataField="CASS" HeaderText="CASS" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
+
+                <asp:BoundField DataField="RETINERI" HeaderText="Rețineri" />
+
+                <asp:BoundField DataField="VIRAT_CARD" HeaderText="Virat card" ReadOnly="True">
+                    <HeaderStyle BackColor="Yellow" />
+                    <ItemStyle BackColor="Yellow" />
+                </asp:BoundField>
             </Columns>
         </asp:GridView>
-        <asp:Button ID="Button2" runat="server" Text="Actualizează Date" />
-        <asp:Button ID="Button3" runat="server" Text="Resetează tabel" OnClick="Button3_Click"/>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+            ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
+            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"
+            CancelSelectOnNullParameter="False"
+            SelectCommand="SELECT * FROM ANGAJATI
+                           WHERE nr_crt = NVL(:ID, nr_crt)
+                             AND UPPER(nume) = UPPER(NVL(:NUME, nume))
+                           ORDER BY nr_crt"
+            UpdateCommand="BEGIN
+                             UPDATE ANGAJATI
+                                SET nume = :NUME, prenume = :PRENUME, functie = :FUNCTIE,
+                                    salariu_baza = :SALARIU_BAZA,
+                                    spor = NVL(:SPOR, 0),
+                                    premii_brute = NVL(:PREMII_BRUTE, 0),
+                                    retineri = NVL(:RETINERI, 0)
+                              WHERE nr_crt = :NR_CRT;
+                           END;">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="TextBox1" Name="ID" PropertyName="Text" Type="Int32" />
+                <asp:ControlParameter ControlID="TextBox2" Name="NUME" PropertyName="Text" Type="String" />
+            </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="NUME" Type="String" />
+                <asp:Parameter Name="PRENUME" Type="String" />
+                <asp:Parameter Name="FUNCTIE" Type="String" />
+                <asp:Parameter Name="SALARIU_BAZA" Type="Int32" />
+                <asp:Parameter Name="SPOR" Type="Int32" />
+                <asp:Parameter Name="PREMII_BRUTE" Type="Int32" />
+                <asp:Parameter Name="RETINERI" Type="Int32" />
+                <asp:Parameter Name="NR_CRT" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
     </div>
 </asp:Content>
 <asp:Content ID="Content1" runat="server" contentplaceholderid="head">
@@ -98,9 +141,6 @@
         .auto-style4 {
             height: 209px;
         }
-        .auto-style5 {
-            margin-top: 31px;
-        }
-    </style>
+        </style>
 </asp:Content>
 

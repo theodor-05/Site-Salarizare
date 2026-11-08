@@ -122,3 +122,14 @@ BEGIN
 END;
 
 SELECT * FROM angajati;
+
+
+BEGIN
+    recalc_angajati(1, 999999);
+END;
+
+SELECT parola_hash
+FROM procente
+WHERE ID=1;
+
+SELECT * FROM procente;
