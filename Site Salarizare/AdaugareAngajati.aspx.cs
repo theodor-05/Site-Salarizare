@@ -16,9 +16,9 @@ public partial class AdaugareAngajati : System.Web.UI.Page
     double cas_procent, cass_procent, impozit_procent;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["utilizator"] == null)
+            Response.Redirect("~/Login.aspx");
     }
-
 
     protected void Button1_Click(object sender, EventArgs e)
     {

@@ -11,7 +11,8 @@ public partial class CalculSalarii : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["utilizator"] == null)
+            Response.Redirect("~/Login.aspx");
     }
 
     protected void Button2_Click(object sender, EventArgs e)

@@ -8,12 +8,13 @@ using System.Data.OracleClient;
 using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
-using System.Globalization;
 
 public partial class ModificareProcente : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["utilizator"] == null)
+            Response.Redirect("~/Login.aspx");
     }
 
     string password;
@@ -39,12 +40,14 @@ public partial class ModificareProcente : System.Web.UI.Page
             string impozit_procent = Text3.Text == "" ? "NULL" : Convert.ToString(Convert.ToDouble(Text3.Text) / 100).Replace(",", ".");
 
             string query_update_procente = @"
-                UPDATE procente
-                    SET cas_procent = NVL(" + cas_procent + @", cas_procent),
-                        cass_procent = NVL(" + cass_procent + @", cass_procent),
-                        impozit_procent = NVL(" + impozit_procent + @", impozit_procent)
-                WHERE id=1
-            ";
+                BEGIN
+                    UPDATE procente
+                        SET cas_procent = NVL(" + cas_procent + @", cas_procent),
+                            cass_procent = NVL(" + cass_procent + @", cass_procent),
+                            impozit_procent = NVL(" + impozit_procent + @", impozit_procent)
+                    WHERE id=1;
+                    recalc_angajati(1, 9999);
+                END;";
 
             try
             {
@@ -67,7 +70,7 @@ public partial class ModificareProcente : System.Web.UI.Page
                         Label1.Text = Convert.ToString((Convert.ToDouble(Text1.Text) / 100)).Replace(",", ".");
                         cmd = new OracleCommand(query_update_procente, conn);
                         cmd.ExecuteNonQuery();
-                        Label1.Text = "Procentele au fost modificate cu success!";
+                        Label1.Text = "Procentele au fost modificate cu success iar salariile angajațiilor au fost recalculate!";
                         Text1.Text = Text2.Text = Text3.Text = Text4.Text = "";
                     }
                     else

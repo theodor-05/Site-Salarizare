@@ -8,7 +8,6 @@ using System.Web.UI.WebControls;
 public partial class HtmlPage : System.Web.UI.MasterPage
 {
     private int i = 0;
-
     private string[] img =
     {
         "~/Reclame/Reclama1.jpg",
@@ -20,6 +19,9 @@ public partial class HtmlPage : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["utilizator"] == null)
+            Response.Redirect("~/Login.aspx");
+
         if (!IsPostBack)
         {
             if (Label1 != null)
@@ -29,16 +31,23 @@ public partial class HtmlPage : System.Web.UI.MasterPage
                 Image1.ImageUrl = img[0];
         }
     }
-
     protected void Timer1_Tick1(object sender, EventArgs e)
     {
-        if (Image1 == null || Label1 == null)
-            return;
-
         i = (i + 1) % img.Length;
         Image1.ImageUrl = img[i];
+    }
+    protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+    {
+        if(e.Item.Value == "Deconectare")
+        {
+            Session.Clear();
+            Response.Redirect("~/Login.aspx");
+        }
+    }
 
-        Label1.Text = DateTime.Now.ToLongDateString();
+    protected void Timer2_Tick(object sender, EventArgs e)
+    {
+        Label1.Text = DateTime.Now.ToString();
     }
 }
 

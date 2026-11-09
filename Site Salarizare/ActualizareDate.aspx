@@ -35,11 +35,11 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>
-                        <asp:Button ID="Button1" runat="server" Text="Caută" OnClick="Button1_Click"/>
+                    <td class="auto-style5">
+                        <asp:Button ID="Button1" runat="server" Text="Caută"/>
                     </td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style5"></td>
+                    <td class="auto-style5"></td>
                 </tr>
             </table>
             <asp:Label ID="Label1" runat="server" Text="Label" Visible="true"></asp:Label>
@@ -140,6 +140,9 @@
     }
         .auto-style4 {
             height: 209px;
+        }
+        .auto-style5 {
+            height: 33px;
         }
         </style>
 </asp:Content>

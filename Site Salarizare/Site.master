@@ -11,14 +11,51 @@
         .auto-style1 {
             margin-bottom: 0px;
         }
+
+        body {
+            margin: 0;
+            padding: 15px 20px;
+            font-family: Segoe UI, Arial, sans-serif;
+        }
+
+        .header-menu {
+            position: relative;
+            z-index: 100;
+            padding-bottom: 10px;
+        }
+
+        .header-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .header-ads {
+            flex: 0 0 auto;
+        }
+
+        .header-clock {
+            flex: 1 1 auto;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .page-content {
+            padding: 20px 0 10px 0;
+        }
     </style>
     </head>
 
-<body style="height: 207px">
+<body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
         <div>
+            <div class="header-menu">
             <asp:Menu ID="Menu1" runat="server"
-                Orientation="Horizontal">
+                Orientation="Horizontal" OnMenuItemClick="Menu1_MenuItemClick">
                 <Items>
                     <asp:MenuItem Text="HOME"
                         NavigateUrl="~/Home.aspx">
@@ -50,17 +87,36 @@
                     <asp:MenuItem Text="MODIF_PROCENTE"
                         NavigateUrl="~/ModificareProcente.aspx">
                     </asp:MenuItem>
+                    <asp:MenuItem Text="DECONECTARE" Value="Deconectare">
+                    </asp:MenuItem>
                 </Items>
             </asp:Menu>
+            </div>
 
-            <asp:ContentPlaceHolder ID="MainContent"
-                runat="server">
-                <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick1">
-                </asp:Timer>
-                <asp:Image ID="Image1" runat="server" Height="132px" Width="187px" />
-            </asp:ContentPlaceHolder>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <div class="header-row">
+                        <div class="header-ads">
+                            <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick1" Interval="10000">
+                            </asp:Timer>
+                            <asp:Timer ID="Timer2" runat="server" Interval="1000" OnTick="Timer2_Tick">
+                            </asp:Timer>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Image ID="Image1" runat="server" Height="160px" Width="160px" />
+                        </div>
+                        <div class="header-clock">
+                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <hr class="auto-style1" />
+
+            <div class="page-content">
+                <asp:ContentPlaceHolder ID="MainContent"
+                    runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
 
         </div>
     </form>
